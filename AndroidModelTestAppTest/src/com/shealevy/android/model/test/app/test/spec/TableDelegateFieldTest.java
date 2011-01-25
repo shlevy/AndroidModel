@@ -24,9 +24,20 @@ public class TableDelegateFieldTest extends AndroidTestCase {
 		assertEquals("Test", s.defaultValue());
 	}
 	
+	public void testItReturnsIntSetAtConstruction() {
+		IntField i = new IntField();
+		assertEquals(1, i.defaultValue().intValue());
+	}
+	
 	private class StringField extends TableDelegateField<TestTableDelegate, String> {
 		public StringField() {
 			super("string", "Test");
+		}
+	}
+	
+	private class IntField extends TableDelegateField<TestTableDelegate, Integer> {
+		public IntField() {
+			super("string", 1);
 		}
 	}
 }
