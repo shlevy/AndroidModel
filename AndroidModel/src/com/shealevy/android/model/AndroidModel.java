@@ -1,14 +1,19 @@
 package com.shealevy.android.model;
 
+import java.util.HashMap;
+
 public class AndroidModel<T> {
-	private String params;
+	private HashMap<TableDelegateField<T,?>, Object> params = new HashMap<TableDelegateField<T,?>, Object>();
+	
+	@SuppressWarnings("unchecked")
 	public <U> U get(TableDelegateField<T, U> field) {
-		if(params != null)
-			return (U) params;
+		if(params.containsKey(field)) {
+			return (U) params.get(field);
+		}
 		return field.defaultValue();
 	}
 	
 	public <U> void set(TableDelegateField<T, U> field, U value) {
-		params = "SecondTest";
+		params.put(field, value);
 	}
 }
