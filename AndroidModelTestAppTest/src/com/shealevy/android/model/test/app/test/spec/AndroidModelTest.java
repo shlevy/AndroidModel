@@ -37,11 +37,19 @@ public class AndroidModelTest extends AndroidTestCase {
 		public IntField() {
 			super("int", 1);
 		}
+		
+		public Integer defaultValue() {
+			return 1;
+		}
 	}
 	
 	private class StringField extends TableDelegateField<TestTableDelegate, String> {
 		public StringField() {
 			super("string", "Test");
+		}
+		
+		public String defaultValue() {
+			return "Test";
 		}
 	}
 }
