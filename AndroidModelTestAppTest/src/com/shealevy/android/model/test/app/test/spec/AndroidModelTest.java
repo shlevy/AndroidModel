@@ -34,21 +34,21 @@ public class AndroidModelTest extends AndroidTestCase {
 	}
 	
 	private class ByteField implements TableDelegateField<TestTableDelegate> {
-		public String getValue() {
+		public String value() {
 			return "byte";
 		}
 		
-		public Class<?> getType() {
+		public Class<?> type() {
 			return byte.class;
 		}
 	}
 	
 	private class StringField implements TableDelegateField<TestTableDelegate> {
-		public String getValue() {
+		public String value() {
 			return "string";
 		}
 		
-		public Class<?> getType() {
+		public Class<?> type() {
 			return String.class;
 		}
 	}
