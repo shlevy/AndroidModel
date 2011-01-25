@@ -33,31 +33,15 @@ public class AndroidModelTest extends AndroidTestCase {
 		assertEquals("Test", (String) model.get(s));
 	}
 	
-	private class IntField implements TableDelegateField<TestTableDelegate, Integer> {
-		public String value() {
-			return "int";
-		}
-		
-		public Class<?> type() {
-			return int.class;
-		}
-		
-		public Object defaultValue() {
-			return 1;
+	private class IntField extends TableDelegateField<TestTableDelegate, Integer> {
+		public IntField() {
+			super("int", 1);
 		}
 	}
 	
-	private class StringField implements TableDelegateField<TestTableDelegate, String> {
-		public String value() {
-			return "string";
-		}
-		
-		public Class<?> type() {
-			return String.class;
-		}
-		
-		public Object defaultValue() {
-			return "Test";
+	private class StringField extends TableDelegateField<TestTableDelegate, String> {
+		public StringField() {
+			super("string", "Test");
 		}
 	}
 }

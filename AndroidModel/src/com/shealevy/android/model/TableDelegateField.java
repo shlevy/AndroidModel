@@ -1,5 +1,7 @@
 package com.shealevy.android.model;
 
-public interface TableDelegateField<T> {
-	Object defaultValue();
+public class TableDelegateField<T, U> {
+	public U defaultValue() {
+		return null;
+	}
 }
