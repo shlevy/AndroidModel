@@ -1,7 +1,7 @@
 package com.shealevy.android.model.test.app.test.spec;
 
 import com.shealevy.android.model.TableDelegateField;
-import com.shealevy.android.model.test.app.test.TestTableDelegate;
+import com.shealevy.android.model.test.app.TestTableDelegate;
 
 import android.test.AndroidTestCase;
 

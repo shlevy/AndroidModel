@@ -5,8 +5,8 @@ import java.util.HashMap;
 import junit.framework.Assert;
 
 import com.shealevy.android.model.AndroidModel;
-import com.shealevy.android.model.test.app.test.TestTableDelegate;
-import com.shealevy.android.model.test.app.test.TestTableDelegate.Field;
+import com.shealevy.android.model.test.app.TestTableDelegate;
+import com.shealevy.android.model.test.app.TestTableDelegate.Field;
 
 import android.content.Context;
 
@@ -27,8 +27,8 @@ public class AndroidModelStepDefinitions {
 		globals.put(modelName, new AndroidModel<TestTableDelegate>());
 	}
 	
-	public void whenISetThe_OfTestTableDelegateAndroidModel_To_(Field field,
-			String modelName, Object value) {
+	public <T> void whenISetThe_OfTestTableDelegateAndroidModel_To_(Field<T> field,
+			String modelName, T value) {
 		@SuppressWarnings("unchecked")
 		AndroidModel<TestTableDelegate> model = (AndroidModel<TestTableDelegate>) globals.get(modelName);
 		model.set(field, value);
@@ -42,8 +42,8 @@ public class AndroidModelStepDefinitions {
 		Assert.assertEquals(1, ((Integer) model.get(TestTableDelegate.Field.ID)).intValue());
 	}
 
-	public void thenThe_OfTestTableDelegateAndroidModel_ShouldBeSetTo_(
-			Field field, String modelName, Object value) {
+	public <T> void thenThe_OfTestTableDelegateAndroidModel_ShouldBeSetTo_(
+			Field<T> field, String modelName, T value) {
 		@SuppressWarnings("unchecked")
 		AndroidModel<TestTableDelegate> model = (AndroidModel<TestTableDelegate>) globals.get(modelName);
 		Assert.assertEquals(value, model.get(field));

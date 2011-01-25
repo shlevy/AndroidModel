@@ -1,4 +1,4 @@
-package com.shealevy.android.model.test.app.test;
+package com.shealevy.android.model.test.app;
 
 import com.shealevy.android.model.TableDelegate;
 import com.shealevy.android.model.TableDelegateField;
