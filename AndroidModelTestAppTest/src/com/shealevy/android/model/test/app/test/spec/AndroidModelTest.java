@@ -33,13 +33,13 @@ public class AndroidModelTest extends AndroidTestCase {
 		assertEquals("Test", (String) model.get(s));
 	}
 	
-	private class IntField implements TableDelegateField<TestTableDelegate> {
+	private class IntField implements TableDelegateField<TestTableDelegate, Integer> {
 		public String value() {
-			return "byte";
+			return "int";
 		}
 		
 		public Class<?> type() {
-			return byte.class;
+			return int.class;
 		}
 		
 		public Object defaultValue() {
@@ -47,7 +47,7 @@ public class AndroidModelTest extends AndroidTestCase {
 		}
 	}
 	
-	private class StringField implements TableDelegateField<TestTableDelegate> {
+	private class StringField implements TableDelegateField<TestTableDelegate, String> {
 		public String value() {
 			return "string";
 		}

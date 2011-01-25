@@ -4,22 +4,20 @@ import com.shealevy.android.model.TableDelegate;
 import com.shealevy.android.model.TableDelegateField;
 
 public class TestTableDelegate extends TableDelegate {
-	public enum Field implements TableDelegateField<TestTableDelegate> {
-		ID("_id", int.class, 1),
-		NAME("name", String.class, "Test");
+	public class Field<T> implements TableDelegateField<TestTableDelegate, T> {
+		public static Field<Integer> ID = new Field<Integer>("_id", 1);
+		public static Field<String> NAME = new Field<String>("name", "Test");
 		
 		private String value;
-		private Class<?> type;
-		private Object defaultValue;
+		private T defaultValue;
 		
-		private Field(String value, Class<?> type, Object defaultValue) {
+		private Field(String value, T defaultValue) {
 			this.value=value;
-			this.type=type;
 			this.defaultValue=defaultValue;
 		}
 		
 		public Class<?> type() {
-			return type;
+			return defaultValue.getClass();
 		}
 		
 		public String value() {
