@@ -6,6 +6,6 @@ public class TableDelegateField<T, U> {
 	}
 	
 	public U defaultValue() {
-		return null;
+		return (U) "Test";
 	}
 }
