@@ -1,5 +1,7 @@
 package com.shealevy.android.model;
 
-public class AndroidModel {
-
+public class AndroidModel<T> {
+	public Object get(Object field) {
+		return null;
+	}
 }

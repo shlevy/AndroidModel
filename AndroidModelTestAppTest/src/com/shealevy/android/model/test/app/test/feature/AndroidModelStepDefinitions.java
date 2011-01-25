@@ -22,6 +22,7 @@ public class AndroidModelStepDefinitions {
 	}
 	public void thenAllTestTableDelegateFieldsOfTestTableDelegateAndroidModel_ShouldBeSetToDefaults(
 			String modelName) {
+		@SuppressWarnings("unchecked")
 		AndroidModel<TestTableDelegate> model = (AndroidModel<TestTableDelegate>) globals.get(modelName);
 		Assert.assertNull((String) model.get(TestTableDelegate.Field.NAME));
 		Assert.assertEquals(0, ((Byte) model.get(TestTableDelegate.Field.TEST_BYTE)).byteValue());
