@@ -21,25 +21,29 @@ public class AndroidModelTest extends AndroidTestCase {
 	}
 
 	// Describe get(TableDelegateField<T> field)
-	public void testItReturns0WhenAnUninitializedByteIsRequested() {
-		ByteField b = new ByteField();
+	public void testItReturnsDefaultValueWhenAnUninitializedIntIsRequested() {
+		IntField i = new IntField();
 		AndroidModel<TestTableDelegate> model = new AndroidModel<TestTableDelegate>();
-		assertEquals((byte) 0, ((Byte) model.get(b)).byteValue());
+		assertEquals(1, ((Integer) model.get(i)).intValue());
 	}
 	
 	public void testItReturnsNullWhenAnUninitializedStringIsRequested() {
 		StringField s = new StringField();
 		AndroidModel<TestTableDelegate> model = new AndroidModel<TestTableDelegate>();
-		assertEquals(null, (String) model.get(s));
+		assertEquals("name", (String) model.get(s));
 	}
 	
-	private class ByteField implements TableDelegateField<TestTableDelegate> {
+	private class IntField implements TableDelegateField<TestTableDelegate> {
 		public String value() {
 			return "byte";
 		}
 		
 		public Class<?> type() {
 			return byte.class;
+		}
+		
+		public Object defaultValue() {
+			return 1;
 		}
 	}
 	
@@ -50,6 +54,10 @@ public class AndroidModelTest extends AndroidTestCase {
 		
 		public Class<?> type() {
 			return String.class;
+		}
+		
+		public Object defaultValue() {
+			return "name";
 		}
 	}
 }
