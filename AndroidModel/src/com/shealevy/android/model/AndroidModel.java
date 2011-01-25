@@ -1,7 +1,7 @@
 package com.shealevy.android.model;
 
 public class AndroidModel<T> {
-	public Object get(Object field) {
-		return "Test";
+	public Object get(TableDelegateField<T> field) {
+		return field.defaultValue();
 	}
 }
