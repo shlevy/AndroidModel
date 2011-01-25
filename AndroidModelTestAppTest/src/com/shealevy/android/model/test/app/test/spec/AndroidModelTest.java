@@ -41,6 +41,13 @@ public class AndroidModelTest extends AndroidTestCase {
 		assertEquals("SecondTest", model.get(s));
 	}
 	
+	public void testItSetsIntValues() {
+		IntField i = new IntField();
+		AndroidModel<TestTableDelegate> model = new AndroidModel<TestTableDelegate>();
+		model.set(i, 2);
+		assertEquals(2, model.get(i).intValue());
+	}
+	
 	private class IntField extends TableDelegateField<TestTableDelegate, Integer> {
 		public IntField() {
 			super("int", 1);
