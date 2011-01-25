@@ -5,7 +5,7 @@ import java.util.HashMap;
 import junit.framework.Assert;
 
 import com.shealevy.android.model.AndroidModel;
-import com.shealevy.android.model.test.app.TestTableDelegate;
+import com.shealevy.android.model.test.app.test.TestTableDelegate;
 
 import android.content.Context;
 
