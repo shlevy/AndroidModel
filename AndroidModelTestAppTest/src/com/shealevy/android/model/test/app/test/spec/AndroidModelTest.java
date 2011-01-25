@@ -27,10 +27,10 @@ public class AndroidModelTest extends AndroidTestCase {
 		assertEquals(1, ((Integer) model.get(i)).intValue());
 	}
 	
-	public void testItReturnsNullWhenAnUninitializedStringIsRequested() {
+	public void testItReturnsDefaultValueWhenAnUninitializedStringIsRequested() {
 		StringField s = new StringField();
 		AndroidModel<TestTableDelegate> model = new AndroidModel<TestTableDelegate>();
-		assertEquals("name", (String) model.get(s));
+		assertEquals("Test", (String) model.get(s));
 	}
 	
 	private class IntField implements TableDelegateField<TestTableDelegate> {
@@ -57,7 +57,7 @@ public class AndroidModelTest extends AndroidTestCase {
 		}
 		
 		public Object defaultValue() {
-			return "name";
+			return "Test";
 		}
 	}
 }
