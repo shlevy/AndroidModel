@@ -20,7 +20,7 @@ public class AndroidModelTest extends AndroidTestCase {
 		super.tearDown();
 	}
 
-	// Describe get(TableDelegateField<T> field)
+	// Describe get(TableDelegateField<T, U> field)
 	public void testItReturnsDefaultValueWhenAnUninitializedIntIsRequested() {
 		IntField i = new IntField();
 		AndroidModel<TestTableDelegate> model = new AndroidModel<TestTableDelegate>();
@@ -33,6 +33,14 @@ public class AndroidModelTest extends AndroidTestCase {
 		assertEquals("Test", (String) model.get(s));
 	}
 	
+	// Describe set(TableDelegateField<T, U> field, U value)
+	public void testItSetsStringValues() {
+		StringField s = new StringField();
+		AndroidModel<TestTableDelegate> model = new AndroidModel<TestTableDelegate>();
+		model.set(s, "SecondTest");
+		assertEquals("SecondTest", model.get(s));
+	}
+	
 	private class IntField extends TableDelegateField<TestTableDelegate, Integer> {
 		public IntField() {
 			super("int", 1);
@@ -40,6 +48,10 @@ public class AndroidModelTest extends AndroidTestCase {
 		
 		public Integer defaultValue() {
 			return 1;
+		}
+		
+		public String name() {
+			return "int";
 		}
 	}
 	
@@ -50,6 +62,10 @@ public class AndroidModelTest extends AndroidTestCase {
 		
 		public String defaultValue() {
 			return "Test";
+		}
+		
+		public String name() {
+			return "string";
 		}
 	}
 }
