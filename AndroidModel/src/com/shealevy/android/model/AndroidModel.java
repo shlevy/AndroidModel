@@ -2,6 +2,8 @@ package com.shealevy.android.model;
 
 import java.util.HashMap;
 
+import android.content.ContentResolver;
+
 public class AndroidModel<T> {
 	private HashMap<TableDelegateField<T,?>, Object> params = new HashMap<TableDelegateField<T,?>, Object>();
 	
@@ -15,5 +17,9 @@ public class AndroidModel<T> {
 	
 	public <U> void set(TableDelegateField<T, U> field, U value) {
 		params.put(field, value);
+	}
+	
+	public void load(ContentResolver cr) {
+		
 	}
 }
