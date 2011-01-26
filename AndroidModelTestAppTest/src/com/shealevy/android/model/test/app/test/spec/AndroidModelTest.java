@@ -1,10 +1,19 @@
 package com.shealevy.android.model.test.app.test.spec;
 
 import com.shealevy.android.model.AndroidModel;
+import com.shealevy.android.model.TableDelegate;
 import com.shealevy.android.model.TableDelegateField;
 import com.shealevy.android.model.test.app.TestTableDelegate;
+import com.shealevy.android.model.test.app.TestTableDelegate.Field;
 
+import android.content.ContentProvider;
+import android.content.ContentResolver;
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.MatrixCursor;
+import android.net.Uri;
 import android.test.AndroidTestCase;
+import android.test.mock.MockContentResolver;
 
 public class AndroidModelTest extends AndroidTestCase {
 
@@ -48,7 +57,39 @@ public class AndroidModelTest extends AndroidTestCase {
 		assertEquals(2, model.get(i).intValue());
 	}
 	
-	private class IntField extends TableDelegateField<TestTableDelegate, Integer> {
+	// Describe load(ContentResolver cr)
+	public void testItLoadsWhenIdIsSetToTwo() {
+		AndroidModel<TwoTableDelegate> model = new AndroidModel<TwoTableDelegate>();
+		model.set(TwoTableDelegate.Field.ID, 2);
+		model.load(getContext().getContentResolver());
+		assertEquals("SecondTest", model.get(TwoTableDelegate.Field.NAME));
+	}
+	
+	private static class TwoTableDelegate extends TableDelegate {
+		public static class Field<T> extends TableDelegateField<TwoTableDelegate, T> {
+			public static final Field<Integer> ID = new Field<Integer>("_id", 1);
+			public static final Field<String> NAME = new Field<String>("name", "Test");
+			
+			private Field(String value, T defaultValue) {
+				super(value, defaultValue);
+			}
+			
+			public Field<?>[] getFields() {
+				return new Field<?>[] {ID, NAME};
+			}
+		}
+		
+		public Cursor query(ContentResolver cr, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+			if(selection.contains("_id = 2")){
+				MatrixCursor cursor = new MatrixCursor(new String[] {"_id", "name"});
+				cursor.addRow(new Object[] {2, "SecondTest"});
+				return cursor;
+			}
+			return null;
+		}
+	}
+	
+	private static class IntField extends TableDelegateField<TestTableDelegate, Integer> {
 		public IntField() {
 			super("int", 1);
 		}
@@ -62,7 +103,7 @@ public class AndroidModelTest extends AndroidTestCase {
 		}
 	}
 	
-	private class StringField extends TableDelegateField<TestTableDelegate, String> {
+	private static class StringField extends TableDelegateField<TestTableDelegate, String> {
 		public StringField() {
 			super("string", "Test");
 		}
