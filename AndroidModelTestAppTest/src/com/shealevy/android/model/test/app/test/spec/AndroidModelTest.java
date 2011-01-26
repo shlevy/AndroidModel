@@ -34,6 +34,14 @@ public class AndroidModelTest extends AndroidTestCase {
 		AndroidModel<TestTableDelegate> model = new AndroidModel<TestTableDelegate>(TestTableDelegate.class);
 		assertNotNull(model.getTableDelegate());
 	}
+	
+	// Describe setTableDelegate(T tableDelegate)
+	public void testItSetsTheTableDelegateToTheProvidedTableDelegate() {
+		AndroidModel<TestTableDelegate> model = new AndroidModel<TestTableDelegate>(TestTableDelegate.class);
+		TestTableDelegate td = new TestTableDelegate();
+		model.setTableDelegate(td);
+		assertEquals(td,model.getTableDelegate());
+	}
 
 	// Describe get(TableDelegateField<T, U> field)
 	public void testItReturnsDefaultValueWhenAnUninitializedIntIsRequested() {
