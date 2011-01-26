@@ -6,9 +6,20 @@ import android.content.ContentResolver;
 
 public class AndroidModel<T> {
 	private HashMap<TableDelegateField<T,?>, Object> params = new HashMap<TableDelegateField<T,?>, Object>();
+	private T tableDelegate;
 	
 	public AndroidModel(Class<T> tClass) {
-		
+		try {
+			tableDelegate = tClass.newInstance();
+		} catch (IllegalAccessException e) {
+			// The class doesn't have a public constructor. Wrap as runtime exception, hope this never happens
+			// Commented out until a feature can be written for this
+			// throw new RuntimeException(e); 
+		} catch (InstantiationException e) {
+			// The class is abstract or an interface. Wrap as runtime exception, hope this never happens
+			// Commented out until a feature can be written for this
+			//throw new RuntimeException(e);
+		}
 	}
 	
 	public void setTableDelegate(T tableDelegate) {
@@ -16,7 +27,7 @@ public class AndroidModel<T> {
 	}
 	
 	public T getTableDelegate() {
-		return null;
+		return tableDelegate;
 	}
 	
 	@SuppressWarnings("unchecked")
