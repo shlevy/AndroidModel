@@ -10,6 +10,15 @@ public class AndroidModel<T> {
 	public AndroidModel(Class<T> tClass) {
 		
 	}
+	
+	public void setTableDelegate(T tableDelegate) {
+		
+	}
+	
+	public T getTableDelegate() {
+		return null;
+	}
+	
 	@SuppressWarnings("unchecked")
 	public <U> U get(TableDelegateField<T, U> field) {
 		if(params.containsKey(field)) {

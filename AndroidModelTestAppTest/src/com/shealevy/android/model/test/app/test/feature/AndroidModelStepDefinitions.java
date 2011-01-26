@@ -58,7 +58,7 @@ public class AndroidModelStepDefinitions {
 			String modelName, String delegateName) {
 		@SuppressWarnings("unchecked")
 		AndroidModel<TestTableDelegate> model = (AndroidModel<TestTableDelegate>) globals.get(modelName);
-		model.setTableDelegate((TableDelegate) globals.get(delegateName));
+		model.setTableDelegate((TestTableDelegate) globals.get(delegateName));
 		
 	}
 	
@@ -81,14 +81,14 @@ public class AndroidModelStepDefinitions {
 			String modelName) {
 		@SuppressWarnings("unchecked")
 		AndroidModel<TestTableDelegate> model = (AndroidModel<TestTableDelegate>) globals.get(modelName);
-		assertEquals(TestTableDelegate.class, model.getTableDelegate().getClass());
+		Assert.assertEquals(TestTableDelegate.class, model.getTableDelegate().getClass());
 	}
 
 	public void thenTheTableDelegateOfTestTableDelegateAndroidModel_ShouldEqualTableDelegate_(
 			String modelName, String delegateName) {
 		@SuppressWarnings("unchecked")
 		AndroidModel<TestTableDelegate> model = (AndroidModel<TestTableDelegate>) globals.get(modelName);
-		assertEquals((TableDelegate) globals.get(delegateName), model.getTableDelegate());
+		Assert.assertEquals((TableDelegate) globals.get(delegateName), model.getTableDelegate());
 	}
 	
 	private class AndroidModelContentResolver extends MockContentResolver {
