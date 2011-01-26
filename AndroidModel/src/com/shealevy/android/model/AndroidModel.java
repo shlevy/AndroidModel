@@ -23,7 +23,7 @@ public class AndroidModel<T> {
 	}
 	
 	public void setTableDelegate(T tableDelegate) {
-		
+		this.tableDelegate = tableDelegate;
 	}
 	
 	public T getTableDelegate() {

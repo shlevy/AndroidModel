@@ -147,9 +147,6 @@ public class AndroidModelStepDefinitions {
 		}
 	}
 
-
-
-
 	private class FakeTestTableDelegate extends TestTableDelegate {
 		
 	}
