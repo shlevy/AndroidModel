@@ -13,9 +13,9 @@ public class TestTableDelegate extends TableDelegate {
 		private Field(String value, T defaultValue) {
 			super(value, defaultValue);
 		}
-		
-		public Uri getUri() {
-			return Uri.parse("content://test/table");
-		}
+	}
+	
+	public Uri getUri() {
+		return Uri.parse("content://test/table");
 	}
 }
