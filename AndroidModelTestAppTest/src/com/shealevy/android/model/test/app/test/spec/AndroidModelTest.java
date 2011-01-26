@@ -32,34 +32,34 @@ public class AndroidModelTest extends AndroidTestCase {
 	// Describe get(TableDelegateField<T, U> field)
 	public void testItReturnsDefaultValueWhenAnUninitializedIntIsRequested() {
 		IntField i = new IntField();
-		AndroidModel<TestTableDelegate> model = new AndroidModel<TestTableDelegate>();
+		AndroidModel<TestTableDelegate> model = new AndroidModel<TestTableDelegate>(TestTableDelegate.class);
 		assertEquals(1, ((Integer) model.get(i)).intValue());
 	}
 	
 	public void testItReturnsDefaultValueWhenAnUninitializedStringIsRequested() {
 		StringField s = new StringField();
-		AndroidModel<TestTableDelegate> model = new AndroidModel<TestTableDelegate>();
+		AndroidModel<TestTableDelegate> model = new AndroidModel<TestTableDelegate>(TestTableDelegate.class);
 		assertEquals("Test", (String) model.get(s));
 	}
 	
 	// Describe set(TableDelegateField<T, U> field, U value)
 	public void testItSetsStringValues() {
 		StringField s = new StringField();
-		AndroidModel<TestTableDelegate> model = new AndroidModel<TestTableDelegate>();
+		AndroidModel<TestTableDelegate> model = new AndroidModel<TestTableDelegate>(TestTableDelegate.class);
 		model.set(s, "SecondTest");
 		assertEquals("SecondTest", model.get(s));
 	}
 	
 	public void testItSetsIntValues() {
 		IntField i = new IntField();
-		AndroidModel<TestTableDelegate> model = new AndroidModel<TestTableDelegate>();
+		AndroidModel<TestTableDelegate> model = new AndroidModel<TestTableDelegate>(TestTableDelegate.class);
 		model.set(i, 2);
 		assertEquals(2, model.get(i).intValue());
 	}
 	
 	// Describe load(ContentResolver cr)
 	public void testItLoadsWhenIdIsSetToTwo() {
-		AndroidModel<TwoTableDelegate> model = new AndroidModel<TwoTableDelegate>();
+		AndroidModel<TwoTableDelegate> model = new AndroidModel<TwoTableDelegate>(TwoTableDelegate.class);
 		model.set(TwoTableDelegate.Field.ID, 2);
 		model.load(getContext().getContentResolver());
 		assertEquals("SecondTest", model.get(TwoTableDelegate.Field.NAME));

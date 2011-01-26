@@ -27,11 +27,11 @@ public class AndroidModelStepDefinitions {
 	}
 	
 	public void givenATestTableDelegateAndroidModelCalled_(String modelName) {
-		globals.put(modelName, new AndroidModel<TestTableDelegate>());
+		globals.put(modelName, new AndroidModel<TestTableDelegate>(TestTableDelegate.class));
 	}
 	
 	public void whenICreateATestTableDelegateAndroidModelCalled_(String modelName) {
-		globals.put(modelName, new AndroidModel<TestTableDelegate>());
+		globals.put(modelName, new AndroidModel<TestTableDelegate>(TestTableDelegate.class));
 	}
 	
 	public <T> void whenISetThe_OfTestTableDelegateAndroidModel_To_(Field<T> field,
