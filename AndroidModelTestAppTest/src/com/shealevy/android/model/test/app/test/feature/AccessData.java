@@ -35,15 +35,15 @@ public class AccessData extends AndroidTestCase {
 		stepDefs.whenISetThe_OfTestTableDelegateAndroidModel_To_(TestTableDelegate.Field.ID, "model1", 2);
 		// And I load TestTableDelegate AndroidModel "model1" with a fake ContentResolver
 		stepDefs.whenILoadTestTableDelegateAndroidModel_WithAFakeContentResolver("model1");
-		// And I set the ID of TestTableDelegate AndroidModel "model2" to 3
-		stepDefs.whenISetThe_OfTestTableDelegateAndroidModel_To_(TestTableDelegate.Field.ID, "model1", 3);
+		// And I set the NAME of TestTableDelegate AndroidModel "model2" to "ThirdTest"
+		stepDefs.whenISetThe_OfTestTableDelegateAndroidModel_To_(TestTableDelegate.Field.NAME, "model1", "ThirdTest");
 		// And I load TestTableDelegate AndroidModel "model2" with a fake ContentResolver
 		stepDefs.whenILoadTestTableDelegateAndroidModel_WithAFakeContentResolver("model2");
 		
 		// Then the NAME of TestTableDelegate AndroidModel "model1" should be set to "SecondTest"
 		stepDefs.thenThe_OfTestTableDelegateAndroidModel_ShouldBeSetTo_(TestTableDelegate.Field.NAME, "model1", "SecondTest");
-		// And the NAME of TestTableDelegate AndroidModel "model2" should be set to "ThirdTest"
-		stepDefs.thenThe_OfTestTableDelegateAndroidModel_ShouldBeSetTo_(TestTableDelegate.Field.NAME, "model2", "ThirdTest");
+		// And the ID of TestTableDelegate AndroidModel "model2" should be set to 3
+		stepDefs.thenThe_OfTestTableDelegateAndroidModel_ShouldBeSetTo_(TestTableDelegate.Field.ID, "model2", 3);
 	}
 
 }
