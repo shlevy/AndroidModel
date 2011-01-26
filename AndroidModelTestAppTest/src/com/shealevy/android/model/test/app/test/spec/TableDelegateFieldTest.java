@@ -31,13 +31,23 @@ public class TableDelegateFieldTest extends AndroidTestCase {
 	
 	private class StringField extends TableDelegateField<TestTableDelegate, String> {
 		public StringField() {
-			super("string", "Test");
+			super("string", String.class, "Test");
+		}
+
+		@Override
+		public StringField[] getFields() {
+			return new StringField[] {new StringField()};
 		}
 	}
 	
 	private class IntField extends TableDelegateField<TestTableDelegate, Integer> {
 		public IntField() {
-			super("string", 1);
+			super("int", int.class, 1);
+		}
+
+		@Override
+		public IntField[] getFields() {
+			return new IntField[] {new IntField()};
 		}
 	}
 }

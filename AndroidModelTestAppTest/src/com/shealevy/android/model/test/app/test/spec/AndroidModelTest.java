@@ -4,16 +4,10 @@ import com.shealevy.android.model.AndroidModel;
 import com.shealevy.android.model.TableDelegate;
 import com.shealevy.android.model.TableDelegateField;
 import com.shealevy.android.model.test.app.TestTableDelegate;
-import com.shealevy.android.model.test.app.TestTableDelegate.Field;
-
-import android.content.ContentProvider;
 import android.content.ContentResolver;
-import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.MatrixCursor;
-import android.net.Uri;
 import android.test.AndroidTestCase;
-import android.test.mock.MockContentResolver;
 
 public class AndroidModelTest extends AndroidTestCase {
 
@@ -79,15 +73,30 @@ public class AndroidModelTest extends AndroidTestCase {
 		assertEquals("SecondTest", model.get(TwoTableDelegate.Field.NAME));
 	}
 	
-	private static class TwoTableDelegate extends TableDelegate {
+	public static class TwoTableDelegate extends TableDelegate {
 		public static class Field<T> extends TableDelegateField<TwoTableDelegate, T> {
-			public static final Field<Integer> ID = new Field<Integer>("_id", 1);
-			public static final Field<String> NAME = new Field<String>("name", "Test");
+			public static final Field<Integer> ID = new Field<Integer>("_id", int.class, 1);
+			public static final Field<String> NAME = new Field<String>("name", String.class, "Test");
 			
-			private Field(String value, T defaultValue) {
-				super(value, defaultValue);
+			private Field(String value, Class<T> type, T defaultValue) {
+				super(value, type, defaultValue);
 			}
 			
+			public String name() {
+				if(this == ID)
+					return "_id";
+				return "name";
+			}
+			
+			@SuppressWarnings("unchecked")
+			public Class<T> type(){
+				if(this == ID)
+					return (Class<T>) int.class;
+				return (Class<T>) String.class;
+						
+			}
+			
+			@Override
 			public Field<?>[] getFields() {
 				return new Field<?>[] {ID, NAME};
 			}
@@ -95,7 +104,7 @@ public class AndroidModelTest extends AndroidTestCase {
 		
 		public Cursor query(ContentResolver cr, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
 			if(selection.contains("_id = 2")){
-				MatrixCursor cursor = new MatrixCursor(new String[] {"_id", "name"});
+				MatrixCursor cursor = new MatrixCursor(projection);
 				cursor.addRow(new Object[] {2, "SecondTest"});
 				return cursor;
 			}
@@ -103,9 +112,9 @@ public class AndroidModelTest extends AndroidTestCase {
 		}
 	}
 	
-	private static class IntField extends TableDelegateField<TestTableDelegate, Integer> {
+	public static class IntField extends TableDelegateField<TestTableDelegate, Integer> {
 		public IntField() {
-			super("int", 1);
+			super("int", int.class, 1);
 		}
 		
 		public Integer defaultValue() {
@@ -115,11 +124,15 @@ public class AndroidModelTest extends AndroidTestCase {
 		public String name() {
 			return "int";
 		}
+		
+		public IntField[] getFields() {
+			return new IntField[] {new IntField()};
+		}
 	}
 	
-	private static class StringField extends TableDelegateField<TestTableDelegate, String> {
+	public static class StringField extends TableDelegateField<TestTableDelegate, String> {
 		public StringField() {
-			super("string", "Test");
+			super("string", String.class, "Test");
 		}
 		
 		public String defaultValue() {
@@ -128,6 +141,10 @@ public class AndroidModelTest extends AndroidTestCase {
 		
 		public String name() {
 			return "string";
+		}
+		
+		public StringField[] getFields() {
+			return new StringField[] {new StringField()};
 		}
 	}
 }

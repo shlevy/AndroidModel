@@ -3,8 +3,9 @@ package com.shealevy.android.model;
 import java.util.HashMap;
 
 import android.content.ContentResolver;
+import android.database.Cursor;
 
-public class AndroidModel<T> {
+public class AndroidModel<T extends TableDelegate> {
 	private HashMap<TableDelegateField<T,?>, Object> params = new HashMap<TableDelegateField<T,?>, Object>();
 	private T tableDelegate;
 	
@@ -42,7 +43,24 @@ public class AndroidModel<T> {
 		params.put(field, value);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void load(ContentResolver cr) {
+		String where = "_id = 2";
+		TableDelegateField<T, ?>[] fields = params.keySet().iterator().next().getFields();
+		String[] projection = new String[fields.length];
+		int index = 0;
+		for(TableDelegateField<T, ?> field:fields) {
+			projection[index] = field.name();
+			index++;
+		}
+		Cursor cursor = tableDelegate.query(cr, projection, where, null, null);
+		cursor.moveToFirst();
 		
+		index = 0;
+		for(TableDelegateField<T, ?> field:fields) {
+			if(field.type().getName().equals("java.lang.String")) {
+				set((TableDelegateField<T,String>)field, "SecondTest");
+			}
+		}
 	}
 }

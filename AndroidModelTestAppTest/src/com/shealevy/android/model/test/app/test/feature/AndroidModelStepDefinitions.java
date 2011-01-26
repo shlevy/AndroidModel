@@ -124,16 +124,14 @@ public class AndroidModelStepDefinitions {
 					String[] selectionArgs, String sortOrder) {
 				if(uri.equals(Uri.parse("content://test/table"))) {
 					MatrixCursor cursor;
-					if(projection == null) {
-						cursor = new MatrixCursor(new String[] { "_id", "name" });
-						Object[] columnValues = null;
-						if(selection.contains("_id = 2"))
-							columnValues = new Object[] { 2, "SecondTest" };
-						else if(selection.contains("name = ThirdTest"))
-							columnValues = new Object[] { 3, "ThirdTest" };
-						cursor.addRow(columnValues);
-						return cursor;
-					} 
+					cursor = new MatrixCursor(projection);
+					Object[] columnValues = null;
+					if(selection.contains("_id = 2"))
+						columnValues = new Object[] { 2, "SecondTest" };
+					else if(selection.contains("name = ThirdTest"))
+						columnValues = new Object[] { 3, "ThirdTest" };
+					cursor.addRow(columnValues);
+					return cursor;
 				}
 				return null;
 			}
