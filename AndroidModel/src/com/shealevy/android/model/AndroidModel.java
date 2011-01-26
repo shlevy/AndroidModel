@@ -7,6 +7,9 @@ import android.content.ContentResolver;
 public class AndroidModel<T> {
 	private HashMap<TableDelegateField<T,?>, Object> params = new HashMap<TableDelegateField<T,?>, Object>();
 	
+	public AndroidModel(Class<T> tClass) {
+		
+	}
 	@SuppressWarnings("unchecked")
 	public <U> U get(TableDelegateField<T, U> field) {
 		if(params.containsKey(field)) {
