@@ -5,6 +5,7 @@ import java.util.HashMap;
 import junit.framework.Assert;
 
 import com.shealevy.android.model.AndroidModel;
+import com.shealevy.android.model.TableDelegate;
 import com.shealevy.android.model.test.app.TestTableDelegate;
 import com.shealevy.android.model.test.app.TestTableDelegate.Field;
 
@@ -30,6 +31,10 @@ public class AndroidModelStepDefinitions {
 		globals.put(modelName, new AndroidModel<TestTableDelegate>(TestTableDelegate.class));
 	}
 	
+	public void givenAFakeTestTableDelegateCalled_(String delegateName) {
+		globals.put(delegateName, new FakeTestTableDelegate());
+	}
+	
 	public void whenICreateATestTableDelegateAndroidModelCalled_(String modelName) {
 		globals.put(modelName, new AndroidModel<TestTableDelegate>(TestTableDelegate.class));
 	}
@@ -39,6 +44,22 @@ public class AndroidModelStepDefinitions {
 		@SuppressWarnings("unchecked")
 		AndroidModel<TestTableDelegate> model = (AndroidModel<TestTableDelegate>) globals.get(modelName);
 		model.set(field, value);
+	}
+	
+	public void whenILoadTestTableDelegateAndroidModel_WithAFakeContentResolver(
+			String modelName) {
+		@SuppressWarnings("unchecked")
+		AndroidModel<TestTableDelegate> model = (AndroidModel<TestTableDelegate>) globals.get(modelName);
+		ContentResolver cr = new AndroidModelContentResolver();
+		model.load(cr);
+	}
+
+	public void whenISetTheTableDelegateOfTestTableDelegateAndroidModel_ToTableDelegate_(
+			String modelName, String delegateName) {
+		@SuppressWarnings("unchecked")
+		AndroidModel<TestTableDelegate> model = (AndroidModel<TestTableDelegate>) globals.get(modelName);
+		model.setTableDelegate((TableDelegate) globals.get(delegateName));
+		
 	}
 	
 	public void thenAllTestTableDelegateFieldsOfTestTableDelegateAndroidModel_ShouldBeSetToDefaults(
@@ -55,13 +76,19 @@ public class AndroidModelStepDefinitions {
 		AndroidModel<TestTableDelegate> model = (AndroidModel<TestTableDelegate>) globals.get(modelName);
 		Assert.assertEquals(value, model.get(field));
 	}
-
-	public void whenILoadTestTableDelegateAndroidModel_WithAFakeContentResolver(
+	
+	public void thenTheTableDelegateOfTestTableDelegateAndroidModel_ShouldBeATestTableDelegate(
 			String modelName) {
 		@SuppressWarnings("unchecked")
 		AndroidModel<TestTableDelegate> model = (AndroidModel<TestTableDelegate>) globals.get(modelName);
-		ContentResolver cr = new AndroidModelContentResolver();
-		model.load(cr);
+		assertEquals(TestTableDelegate.class, model.getTableDelegate().getClass());
+	}
+
+	public void thenTheTableDelegateOfTestTableDelegateAndroidModel_ShouldEqualTableDelegate_(
+			String modelName, String delegateName) {
+		@SuppressWarnings("unchecked")
+		AndroidModel<TestTableDelegate> model = (AndroidModel<TestTableDelegate>) globals.get(modelName);
+		assertEquals((TableDelegate) globals.get(delegateName), model.getTableDelegate());
 	}
 	
 	private class AndroidModelContentResolver extends MockContentResolver {
@@ -119,4 +146,16 @@ public class AndroidModelStepDefinitions {
 			
 		}
 	}
+
+
+
+
+	private class FakeTestTableDelegate extends TestTableDelegate {
+		
+	}
+
+
+
+
+
 }
