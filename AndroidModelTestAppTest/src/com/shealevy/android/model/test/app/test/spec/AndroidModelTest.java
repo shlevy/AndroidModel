@@ -28,6 +28,12 @@ public class AndroidModelTest extends AndroidTestCase {
 	protected void tearDown() throws Exception {
 		super.tearDown();
 	}
+	
+	// Describe AndroidModel(Class<T> tClass)
+	public void testItSetsTheTableDelegate() {
+		AndroidModel<TestTableDelegate> model = new AndroidModel<TestTableDelegate>(TestTableDelegate.class);
+		assertNotNull(model.getTableDelegate());
+	}
 
 	// Describe get(TableDelegateField<T, U> field)
 	public void testItReturnsDefaultValueWhenAnUninitializedIntIsRequested() {
