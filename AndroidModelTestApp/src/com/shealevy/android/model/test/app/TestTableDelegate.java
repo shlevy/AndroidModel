@@ -13,6 +13,10 @@ public class TestTableDelegate extends TableDelegate {
 		private Field(String value, T defaultValue) {
 			super(value, defaultValue);
 		}
+		
+		public Field<?>[] getFields() {
+			return new Field<?>[] {ID, NAME};
+		}
 	}
 	
 	public Uri getUri() {

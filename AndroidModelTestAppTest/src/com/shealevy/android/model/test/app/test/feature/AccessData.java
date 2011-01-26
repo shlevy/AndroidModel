@@ -26,16 +26,24 @@ public class AccessData extends AndroidTestCase {
 	}
 	
 	public void testLoadingData() {
-		// Given a TestTableDelegate AndroidModel called "model"
-		stepDefs.givenATestTableDelegateAndroidModelCalled_("model");
+		// Given a TestTableDelegate AndroidModel called "model1"
+		stepDefs.givenATestTableDelegateAndroidModelCalled_("model1");
+		// And a TestTableDelegate AndroidModel called "model2"
+		stepDefs.givenATestTableDelegateAndroidModelCalled_("model2");
 		
-		// When I set the ID of TestTableDelegate AndroidModel "model" to 2
-		stepDefs.whenISetThe_OfTestTableDelegateAndroidModel_To_(TestTableDelegate.Field.ID, "model", 2);
-		// And I load TestTableDelegate AndroidModel "model" with a fake ContentResolver
-		stepDefs.whenILoadTestTableDelegateAndroidModel_WithAFakeContentResolver("model");
+		// When I set the ID of TestTableDelegate AndroidModel "model1" to 2
+		stepDefs.whenISetThe_OfTestTableDelegateAndroidModel_To_(TestTableDelegate.Field.ID, "model1", 2);
+		// And I load TestTableDelegate AndroidModel "model1" with a fake ContentResolver
+		stepDefs.whenILoadTestTableDelegateAndroidModel_WithAFakeContentResolver("model1");
+		// And I set the ID of TestTableDelegate AndroidModel "model2" to 3
+		stepDefs.whenISetThe_OfTestTableDelegateAndroidModel_To_(TestTableDelegate.Field.ID, "model1", 3);
+		// And I load TestTableDelegate AndroidModel "model2" with a fake ContentResolver
+		stepDefs.whenILoadTestTableDelegateAndroidModel_WithAFakeContentResolver("model2");
 		
-		// Then the NAME of TestTableDelegate AndroidModel "model" should be set to "SecondTest"
-		stepDefs.thenThe_OfTestTableDelegateAndroidModel_ShouldBeSetTo_(TestTableDelegate.Field.NAME, "model", "SecondTest");
+		// Then the NAME of TestTableDelegate AndroidModel "model1" should be set to "SecondTest"
+		stepDefs.thenThe_OfTestTableDelegateAndroidModel_ShouldBeSetTo_(TestTableDelegate.Field.NAME, "model1", "SecondTest");
+		// And the NAME of TestTableDelegate AndroidModel "model2" should be set to "ThirdTest"
+		stepDefs.thenThe_OfTestTableDelegateAndroidModel_ShouldBeSetTo_(TestTableDelegate.Field.NAME, "model2", "ThirdTest");
 	}
 
 }

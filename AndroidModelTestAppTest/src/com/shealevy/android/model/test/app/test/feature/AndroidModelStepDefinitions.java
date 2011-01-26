@@ -95,19 +95,21 @@ public class AndroidModelStepDefinitions {
 			@Override
 			public Cursor query(Uri uri, String[] projection, String selection,
 					String[] selectionArgs, String sortOrder) {
-				int id;
-				try {
-					id =Integer.decode(uri.getLastPathSegment());
-				} catch(NumberFormatException e) {
-					id = 0;
-				}
-				String test = uri.getPathSegments().get(1);
-				
-				if(test.equals("table")) {
+				int id=0;
+				if(selection.contains("_id = 2"))
+					id=2;
+				else if(selection.contains("_id = 3"))
+					id = 3;
+
+				if(uri.equals(Uri.parse("content://test/table"))) {
 					MatrixCursor cursor;
 					if(projection == null) {
 						cursor = new MatrixCursor(new String[] { "_id", "name" });
-						Object[] columnValues = new Object[] { id, id == 2 ? "TestCalendar":null };
+						Object[] columnValues = null;
+						if(id == 2)
+							columnValues = new Object[] { id, "SecondTest" };
+						else if(id == 3)
+							columnValues = new Object[] { id, "ThirdTest" };
 						cursor.addRow(columnValues);
 						return cursor;
 					} 
