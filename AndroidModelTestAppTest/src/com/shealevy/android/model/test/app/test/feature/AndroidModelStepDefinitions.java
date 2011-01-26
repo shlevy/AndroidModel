@@ -8,7 +8,14 @@ import com.shealevy.android.model.AndroidModel;
 import com.shealevy.android.model.test.app.TestTableDelegate;
 import com.shealevy.android.model.test.app.TestTableDelegate.Field;
 
+import android.content.ContentProvider;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.MatrixCursor;
+import android.net.Uri;
+import android.test.mock.MockContentResolver;
 
 public class AndroidModelStepDefinitions {
 	@SuppressWarnings("unused")
@@ -47,5 +54,73 @@ public class AndroidModelStepDefinitions {
 		@SuppressWarnings("unchecked")
 		AndroidModel<TestTableDelegate> model = (AndroidModel<TestTableDelegate>) globals.get(modelName);
 		Assert.assertEquals(value, model.get(field));
+	}
+
+	public void whenILoadTestTableDelegateAndroidModel_WithAFakeContentResolver(
+			String modelName) {
+		@SuppressWarnings("unchecked")
+		AndroidModel<TestTableDelegate> model = (AndroidModel<TestTableDelegate>) globals.get(modelName);
+		ContentResolver cr = new AndroidModelContentResolver();
+		model.load(cr);
+	}
+	
+	private class AndroidModelContentResolver extends MockContentResolver {
+		public AndroidModelContentResolver() {
+			super();
+			this.addProvider("test", new MockContentProvider());
+		}
+		
+		private class MockContentProvider extends ContentProvider {
+
+			@Override
+			public int delete(Uri uri, String selection, String[] selectionArgs) {
+				return 0;
+			}
+
+			@Override
+			public String getType(Uri uri) {
+				return null;
+			}
+
+			@Override
+			public Uri insert(Uri uri, ContentValues values) {
+				return null;
+			}
+
+			@Override
+			public boolean onCreate() {
+				return false;
+			}
+
+			@Override
+			public Cursor query(Uri uri, String[] projection, String selection,
+					String[] selectionArgs, String sortOrder) {
+				int id;
+				try {
+					id =Integer.decode(uri.getLastPathSegment());
+				} catch(NumberFormatException e) {
+					id = 0;
+				}
+				String test = uri.getPathSegments().get(1);
+				
+				if(test.equals("table")) {
+					MatrixCursor cursor;
+					if(projection == null) {
+						cursor = new MatrixCursor(new String[] { "_id", "name" });
+						Object[] columnValues = new Object[] { id, id == 2 ? "TestCalendar":null };
+						cursor.addRow(columnValues);
+						return cursor;
+					} 
+				}
+				return null;
+			}
+
+			@Override
+			public int update(Uri uri, ContentValues values, String selection,
+					String[] selectionArgs) {
+				return 0;
+			}
+			
+		}
 	}
 }

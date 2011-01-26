@@ -1,5 +1,7 @@
 package com.shealevy.android.model.test.app;
 
+import android.net.Uri;
+
 import com.shealevy.android.model.TableDelegate;
 import com.shealevy.android.model.TableDelegateField;
 
@@ -10,6 +12,10 @@ public class TestTableDelegate extends TableDelegate {
 		
 		private Field(String value, T defaultValue) {
 			super(value, defaultValue);
+		}
+		
+		public Uri getUri() {
+			return Uri.parse("content://test/table");
 		}
 	}
 }
