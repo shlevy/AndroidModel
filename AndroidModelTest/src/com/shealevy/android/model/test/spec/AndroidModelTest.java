@@ -3,6 +3,7 @@ package com.shealevy.android.model.test.spec;
 import com.shealevy.android.model.AndroidModel;
 import com.shealevy.android.model.TableDelegate;
 import com.shealevy.android.model.TableDelegateField;
+import com.shealevy.android.model.injection.ClassDelegate;
 import com.shealevy.android.model.test.TestTableDelegate;
 
 import android.content.ContentResolver;
@@ -28,6 +29,12 @@ public class AndroidModelTest extends AndroidTestCase {
 	// Describe AndroidModel(Class<T> tableDelegateClass)
 	public void testItSetsTheTableDelegate() {
 		AndroidModel<TestTableDelegate> model = new AndroidModel<TestTableDelegate>(TestTableDelegate.class);
+		assertNotNull(model.getTableDelegate());
+	}
+	
+	// Describe AndroidModel(ClassDelegate<T> tableDelegateClass)
+	public void testItSetsTheTableDelegateWithAClassDelegate() {
+		AndroidModel<TestTableDelegate> model = new AndroidModel<TestTableDelegate>(new ClassDelegate<TestTableDelegate>(TestTableDelegate.class));
 		assertNotNull(model.getTableDelegate());
 	}
 	
