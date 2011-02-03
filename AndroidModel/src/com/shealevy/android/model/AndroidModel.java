@@ -33,6 +33,10 @@ public class AndroidModel<T extends TableDelegate> {
 		setTableDelegate(tableDelegate);
 		constructParams(new ClassDelegate<HashMap>(HashMap.class));
 	}
+	
+	public <U extends HashMap> AndroidModel(T tableDelegate, Class<U> hashMapClass){
+		
+	}
 
 	@SuppressWarnings("unchecked")
 	private void constructParams(ClassDelegate<? extends HashMap> hashMapClass) {
