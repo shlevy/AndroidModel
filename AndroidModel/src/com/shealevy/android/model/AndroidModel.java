@@ -2,6 +2,8 @@ package com.shealevy.android.model;
 
 import java.util.HashMap;
 
+import com.shealevy.android.model.injection.ClassDelegate;
+
 import android.content.ContentResolver;
 import android.database.Cursor;
 
@@ -21,6 +23,10 @@ public class AndroidModel<T extends TableDelegate> {
 			// Commented out until a feature can be written for this
 			//throw new RuntimeException(e);
 		}
+	}
+	
+	public AndroidModel(ClassDelegate<T> tableDelegateClass) {
+		
 	}
 	
 	public AndroidModel(T tableDelegate) {

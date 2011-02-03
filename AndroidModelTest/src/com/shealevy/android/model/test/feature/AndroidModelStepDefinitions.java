@@ -6,6 +6,7 @@ import junit.framework.Assert;
 
 import com.shealevy.android.model.AndroidModel;
 import com.shealevy.android.model.TableDelegate;
+import com.shealevy.android.model.injection.ClassDelegate;
 import com.shealevy.android.model.test.TestTableDelegate;
 import com.shealevy.android.model.test.TestTableDelegate.Field;
 
