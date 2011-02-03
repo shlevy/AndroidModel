@@ -12,20 +12,14 @@ public class AndroidModel<T extends TableDelegate> {
 	private T tableDelegate;
 	
 	public AndroidModel(Class<T> tableDelegateClass) {
-		try {
-			setTableDelegate(tableDelegateClass.newInstance());
-		} catch (IllegalAccessException e) {
-			// The class doesn't have a public constructor. Wrap as runtime exception, hope this never happens
-			// Commented out until a feature can be written for this
-			// throw new RuntimeException(e); 
-		} catch (InstantiationException e) {
-			// The class is abstract or an interface. Wrap as runtime exception, hope this never happens
-			// Commented out until a feature can be written for this
-			//throw new RuntimeException(e);
-		}
+		this(new ClassDelegate<T>(tableDelegateClass));
 	}
 	
 	public AndroidModel(ClassDelegate<T> tableDelegateClass) {
+		constructTableDelegate(tableDelegateClass);
+	}
+
+	private void constructTableDelegate(ClassDelegate<T> tableDelegateClass) {
 		try {
 			setTableDelegate(tableDelegateClass.newInstance());
 		} catch (IllegalAccessException e) {
