@@ -67,7 +67,7 @@ public class AndroidModelTest extends AndroidTestCase {
 			if(f.getName().equals("params")) {
 				f.setAccessible(true);
 				assertEquals(FakeHashMap.class, f.get(model).getClass());	
-			}	
+			}
 		}
 	}
 	
