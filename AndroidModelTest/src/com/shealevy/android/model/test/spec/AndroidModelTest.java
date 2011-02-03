@@ -37,6 +37,7 @@ public class AndroidModelTest extends AndroidTestCase {
 		AndroidModel<TestTableDelegate> model = new AndroidModel<TestTableDelegate>(td);
 		assertEquals(td,model.getTableDelegate());
 	}
+	
 	// Describe setTableDelegate(T tableDelegate)
 	public void testSetTableDelegateSetsTheTableDelegateToTheProvidedTableDelegate() {
 		AndroidModel<TestTableDelegate> model = new AndroidModel<TestTableDelegate>(TestTableDelegate.class);

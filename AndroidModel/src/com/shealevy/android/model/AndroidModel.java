@@ -24,7 +24,7 @@ public class AndroidModel<T extends TableDelegate> {
 	}
 	
 	public AndroidModel(T tableDelegate) {
-		
+		setTableDelegate(tableDelegate);
 	}
 	
 	public void setTableDelegate(T tableDelegate) {
