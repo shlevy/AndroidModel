@@ -1,5 +1,7 @@
 package com.shealevy.android.model.test.feature;
 
+import com.shealevy.android.model.test.TestTableDelegate;
+
 import android.test.AndroidTestCase;
 
 public class InjectDependencies extends AndroidTestCase {
@@ -29,6 +31,17 @@ public class InjectDependencies extends AndroidTestCase {
 		
 		// Then the TableDelegate of TestTableDelegate AndroidModel "model" should be a TestTableDelegate
 		stepDefs.thenTheTableDelegateOfTestTableDelegateAndroidModel_ShouldBeATestTableDelegate("model");
+	}
+	
+	public void testProvidingHashMapSubClassAtConstruction() {
+		// Given a TestTableDelegate AndroidModel called "model" with a FakeHashMapClass
+		stepDefs.givenATestTableDelegateAndroidModelCalled_WithAFakeHashMapClass("model");
+		
+		// When I set the ID of TestTableDelegate AndroidModel "model" to 2
+		stepDefs.whenISetThe_OfTestTableDelegateAndroidModel_To_(TestTableDelegate.Field.ID, "model", 2);
+		
+		// Then the FakeHashMap put method should have been called with TestTableDelegate.Field.ID and 2
+		stepDefs.thenTheFakeHashMapPutMethodShouldHaveBeenCalledWith_And_(TestTableDelegate.Field.ID, 2);
 	}
 	
 	public void testUsingAClassDelegateToSetTheTableDelegateAtConstruction() {
