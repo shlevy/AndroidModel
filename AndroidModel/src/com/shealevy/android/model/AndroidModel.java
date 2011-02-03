@@ -9,9 +9,9 @@ public class AndroidModel<T extends TableDelegate> {
 	private HashMap<TableDelegateField<T,?>, Object> params = new HashMap<TableDelegateField<T,?>, Object>();
 	private T tableDelegate;
 	
-	public AndroidModel(Class<T> tClass) {
+	public AndroidModel(Class<T> tableDelegateClass) {
 		try {
-			tableDelegate = tClass.newInstance();
+			tableDelegate = tableDelegateClass.newInstance();
 		} catch (IllegalAccessException e) {
 			// The class doesn't have a public constructor. Wrap as runtime exception, hope this never happens
 			// Commented out until a feature can be written for this
@@ -23,7 +23,7 @@ public class AndroidModel<T extends TableDelegate> {
 		}
 	}
 	
-	public AndroidModel(Class<T> tClass, T tableDelegate) {
+	public AndroidModel(T tableDelegate) {
 		
 	}
 	

@@ -64,7 +64,7 @@ public class AndroidModelStepDefinitions {
 	
 	public void whenICreateATestTableDelegateAndroidModelCalled_WithTestTableDelegate_(
 			String modelName, String delegateName) {
-		globals.put(modelName, new AndroidModel<TestTableDelegate>(TestTableDelegate.class, (TestTableDelegate) globals.get(delegateName)));
+		globals.put(modelName, new AndroidModel<TestTableDelegate>((TestTableDelegate) globals.get(delegateName)));
 	}
 	
 	public void thenAllTestTableDelegateFieldsOfTestTableDelegateAndroidModel_ShouldBeSetToDefaults(
