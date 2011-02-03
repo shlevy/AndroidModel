@@ -25,14 +25,20 @@ public class AndroidModelTest extends AndroidTestCase {
 		super.tearDown();
 	}
 	
-	// Describe AndroidModel(Class<T> tClass)
+	// Describe AndroidModel(Class<T> tableDelegateClass)
 	public void testItSetsTheTableDelegate() {
 		AndroidModel<TestTableDelegate> model = new AndroidModel<TestTableDelegate>(TestTableDelegate.class);
 		assertNotNull(model.getTableDelegate());
 	}
 	
+	// Describe AndroidModel(T tableDelegate)
+	public void testConstructorSetsTheTableDelegateToTheProvidedTableDelegate() {
+		TestTableDelegate td = new TestTableDelegate();
+		AndroidModel<TestTableDelegate> model = new AndroidModel<TestTableDelegate>(td);
+		assertEquals(td,model.getTableDelegate());
+	}
 	// Describe setTableDelegate(T tableDelegate)
-	public void testItSetsTheTableDelegateToTheProvidedTableDelegate() {
+	public void testSetTableDelegateSetsTheTableDelegateToTheProvidedTableDelegate() {
 		AndroidModel<TestTableDelegate> model = new AndroidModel<TestTableDelegate>(TestTableDelegate.class);
 		TestTableDelegate td = new TestTableDelegate();
 		model.setTableDelegate(td);
