@@ -58,6 +58,19 @@ public class AndroidModelTest extends AndroidTestCase {
 		assertNotNull(model.getTableDelegate());
 	}
 	
+	// Describe AndroidModel(ClassDelegate<T> tableDelegateClass, ClassDelegate<? extends HashMap> hashMapClass)
+	public void testItCreatesANewInstanceOfHashMapClassAndSavesItInParamsWhenAClassDelegateIsUsed() throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+		@SuppressWarnings({ "unchecked", "rawtypes" })
+		AndroidModel<TestTableDelegate> model = new AndroidModel<TestTableDelegate>(new ClassDelegate(TestTableDelegate.class), new ClassDelegate(FakeHashMap.class));
+		Field[] fields = AndroidModel.class.getDeclaredFields();
+		for(Field f:fields) {
+			if(f.getName().equals("params")) {
+				f.setAccessible(true);
+				assertEquals(FakeHashMap.class, f.get(model).getClass());	
+			}	
+		}
+	}
+	
 	// Describe AndroidModel(T tableDelegate)
 	public void testConstructorSetsTheTableDelegateToTheProvidedTableDelegate() {
 		TestTableDelegate td = new TestTableDelegate();
