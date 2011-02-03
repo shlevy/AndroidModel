@@ -36,6 +36,11 @@ public class AndroidModel<T extends TableDelegate> {
 	public AndroidModel(ClassDelegate<T> tableDelegateClass) {
 		constructTableDelegate(tableDelegateClass);
 	}
+	
+	@SuppressWarnings("rawtypes")
+	public AndroidModel(ClassDelegate<T> tableDelegateClass, ClassDelegate<? extends HashMap> hashMapClass) {
+		
+	}
 
 	public AndroidModel(T tableDelegate) {
 		setTableDelegate(tableDelegate);

@@ -118,6 +118,7 @@ public class AndroidModelStepDefinitions {
 				TestTableDelegate.class, FakeHashMap.class));
 	}
 
+	@SuppressWarnings("rawtypes")
 	public void givenATestTableDelegateAndroidModelCalled_WithAFakeHashMapClassCreatedUsingClassDelegates(
 			String modelName) {
 		globals.put(modelName, new AndroidModel<TestTableDelegate>(
