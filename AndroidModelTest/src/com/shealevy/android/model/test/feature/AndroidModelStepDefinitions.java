@@ -118,6 +118,12 @@ public class AndroidModelStepDefinitions {
 				TestTableDelegate.class, FakeHashMap.class));
 	}
 
+	public void givenATestTableDelegateAndroidModelCalled_WithAFakeHashMapClassCreatedUsingClassDelegates(
+			String modelName) {
+		globals.put(modelName, new AndroidModel<TestTableDelegate>(
+				new ClassDelegate<TestTableDelegate>(TestTableDelegate.class), new ClassDelegate<FakeHashMap>(FakeHashMap.class)));
+	}
+	
 	public void whenICreateATestTableDelegateAndroidModelCalled_(
 			String modelName) {
 		globals.put(modelName, new AndroidModel<TestTableDelegate>(
