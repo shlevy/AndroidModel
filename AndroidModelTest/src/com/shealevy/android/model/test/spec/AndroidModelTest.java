@@ -1,5 +1,8 @@
 package com.shealevy.android.model.test.spec;
 
+import java.util.HashMap;
+import java.lang.reflect.Field;
+
 import com.shealevy.android.model.AndroidModel;
 import com.shealevy.android.model.TableDelegate;
 import com.shealevy.android.model.TableDelegateField;
@@ -30,6 +33,18 @@ public class AndroidModelTest extends AndroidTestCase {
 	public void testItSetsTheTableDelegate() {
 		AndroidModel<TestTableDelegate> model = new AndroidModel<TestTableDelegate>(TestTableDelegate.class);
 		assertNotNull(model.getTableDelegate());
+	}
+	
+	// Describe AndroidModel(Class<T> tableDelegateClass, Class<? extends HashMap> hashMapClass)
+	public void testItCreatesANewInstanceOfHashMapClassAndSavesItInParams() throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+		AndroidModel<TestTableDelegate> model = new AndroidModel<TestTableDelegate>(TestTableDelegate.class, FakeHashMap.class);
+		Field[] fields = AndroidModel.class.getDeclaredFields();
+		for(Field f:fields) {
+			if(f.getName().equals("params")) {
+				f.setAccessible(true);
+				assertEquals(FakeHashMap.class, f.get(model).getClass());	
+			}	
+		}
 	}
 	
 	// Describe AndroidModel(ClassDelegate<T> tableDelegateClass)
@@ -87,6 +102,11 @@ public class AndroidModelTest extends AndroidTestCase {
 		model.set(TwoTableDelegate.Field.ID, 2);
 		model.load(getContext().getContentResolver());
 		assertEquals("SecondTest", model.get(TwoTableDelegate.Field.NAME));
+	}
+	
+	public static class FakeHashMap<K, V> extends HashMap<K, V> {
+		private static final long serialVersionUID = -3427816561016230757L;
+		
 	}
 	
 	public static class TwoTableDelegate extends TableDelegate {
