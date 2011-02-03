@@ -39,6 +39,7 @@ public class AndroidModel<T extends TableDelegate> {
 	
 	@SuppressWarnings("rawtypes")
 	public AndroidModel(ClassDelegate<T> tableDelegateClass, ClassDelegate<? extends HashMap> hashMapClass) {
+		this(tableDelegateClass);
 		constructParams(hashMapClass);
 	}
 
