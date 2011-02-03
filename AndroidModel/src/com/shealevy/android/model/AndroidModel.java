@@ -35,7 +35,7 @@ public class AndroidModel<T extends TableDelegate> {
 	}
 	
 	public <U extends HashMap> AndroidModel(T tableDelegate, Class<U> hashMapClass){
-		
+		constructParams(new ClassDelegate<U>(hashMapClass));
 	}
 
 	@SuppressWarnings("unchecked")
