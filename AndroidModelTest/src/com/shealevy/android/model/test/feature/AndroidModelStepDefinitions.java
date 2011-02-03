@@ -54,7 +54,7 @@ public class AndroidModelStepDefinitions {
 		model.load(cr);
 	}
 
-	public void whenISetTheTableDelegateOfTestTableDelegateAndroidModel_ToTableDelegate_(
+	public void whenISetTheTableDelegateOfTestTableDelegateAndroidModel_ToTestTableDelegate_(
 			String modelName, String delegateName) {
 		@SuppressWarnings("unchecked")
 		AndroidModel<TestTableDelegate> model = (AndroidModel<TestTableDelegate>) globals.get(modelName);
@@ -62,9 +62,9 @@ public class AndroidModelStepDefinitions {
 		
 	}
 	
-	public void whenICreateATestTableDelegateAndroidModelCalled_WithTableDelegate_(
+	public void whenICreateATestTableDelegateAndroidModelCalled_WithTestTableDelegate_(
 			String modelName, String delegateName) {
-		globals.put(modelName, new AndroidModel<TestTableDelegate>(TestTableDelegate.class, (TableDelegate) globals.get(delegateName)));
+		globals.put(modelName, new AndroidModel<TestTableDelegate>(TestTableDelegate.class, (TestTableDelegate) globals.get(delegateName)));
 	}
 	
 	public void thenAllTestTableDelegateFieldsOfTestTableDelegateAndroidModel_ShouldBeSetToDefaults(

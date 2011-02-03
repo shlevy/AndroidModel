@@ -36,7 +36,7 @@ public class InjectDependencies extends AndroidTestCase {
 		stepDefs.givenAFakeTestTableDelegateCalled_("delegate");
 		
 		// When I create a TestTableDelegate AndroidModel called "model" with TableDelegate "delegate"
-		stepDefs.whenICreateATestTableDelegateAndroidModelCalled_WithTableDelegate_("model", "delegate");
+		stepDefs.whenICreateATestTableDelegateAndroidModelCalled_WithTestTableDelegate_("model", "delegate");
 		
 		// Then the TableDelegate of TestTableDelegate AndroidModel "model" should equal TableDelegate "delegate"
 		stepDefs.thenTheTableDelegateOfTestTableDelegateAndroidModel_ShouldEqualTableDelegate_("model", "delegate");
@@ -49,7 +49,7 @@ public class InjectDependencies extends AndroidTestCase {
 		stepDefs.givenAFakeTestTableDelegateCalled_("delegate");
 		
 		// When I set the TableDelegate of TestTableDelegate AndroidModel "model" to TableDelegate "delegate"
-		stepDefs.whenISetTheTableDelegateOfTestTableDelegateAndroidModel_ToTableDelegate_("model", "delegate");
+		stepDefs.whenISetTheTableDelegateOfTestTableDelegateAndroidModel_ToTestTableDelegate_("model", "delegate");
 		
 		// Then the TableDelegate of TestTableDelegate AndroidModel "model" should equal TableDelegate "delegate"
 		stepDefs.thenTheTableDelegateOfTestTableDelegateAndroidModel_ShouldEqualTableDelegate_("model", "delegate");

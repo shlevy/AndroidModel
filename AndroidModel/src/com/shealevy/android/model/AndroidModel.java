@@ -23,6 +23,10 @@ public class AndroidModel<T extends TableDelegate> {
 		}
 	}
 	
+	public AndroidModel(Class<T> tClass, T tableDelegate) {
+		
+	}
+	
 	public void setTableDelegate(T tableDelegate) {
 		this.tableDelegate = tableDelegate;
 	}
