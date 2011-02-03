@@ -62,6 +62,11 @@ public class AndroidModelStepDefinitions {
 		
 	}
 	
+	public void whenICreateATestTableDelegateAndroidModelCalled_WithTableDelegate_(
+			String modelName, String delegateName) {
+		globals.put(modelName, new AndroidModel<TestTableDelegate>(TestTableDelegate.class, (TableDelegate) globals.get(delegateName)));
+	}
+	
 	public void thenAllTestTableDelegateFieldsOfTestTableDelegateAndroidModel_ShouldBeSetToDefaults(
 			String modelName) {
 		@SuppressWarnings("unchecked")
@@ -148,9 +153,4 @@ public class AndroidModelStepDefinitions {
 	private class FakeTestTableDelegate extends TestTableDelegate {
 		
 	}
-
-
-
-
-
 }
