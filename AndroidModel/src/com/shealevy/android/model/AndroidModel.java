@@ -17,6 +17,7 @@ public class AndroidModel<T extends TableDelegate> {
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public AndroidModel(Class<T> tableDelegateClass, Class<? extends HashMap> hashMapClass) {
+		this(tableDelegateClass);
 		try {
 			params = hashMapClass.newInstance();
 		} catch (IllegalAccessException e) {
