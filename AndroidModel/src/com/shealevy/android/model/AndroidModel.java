@@ -15,8 +15,21 @@ public class AndroidModel<T extends TableDelegate> {
 		this(new ClassDelegate<T>(tableDelegateClass));
 	}
 	
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public AndroidModel(Class<T> tableDelegateClass, Class<? extends HashMap> hashMapClass) {
+		try {
+			params = hashMapClass.newInstance();
+		} catch (IllegalAccessException e) {
+			// The class doesn't have a public constructor. Wrap as runtime
+			// exception, hope this never happens
+			// Commented out until a feature can be written for this
+			// throw new RuntimeException(e);
+		} catch (InstantiationException e) {
+			// The class is abstract or an interface. Wrap as runtime exception,
+			// hope this never happens
+			// Commented out until a feature can be written for this
+			// throw new RuntimeException(e);
+		}
 	}
 
 	public AndroidModel(ClassDelegate<T> tableDelegateClass) {
