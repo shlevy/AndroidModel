@@ -31,6 +31,14 @@ public class InjectDependencies extends AndroidTestCase {
 		stepDefs.thenTheTableDelegateOfTestTableDelegateAndroidModel_ShouldBeATestTableDelegate("model");
 	}
 	
+	public void testUsingAClassDelegateToSetTheTableDelegateAtConstruction() {
+		// When I create a TestTableDelegate AndroidModel called "model" using a ClassDelegate
+		stepDefs.whenICreateATestTableDelegateAndroidModelCalled_UsingAClassDelegate("model");
+		
+		// Then the TableDelegate of TestTableDelegate AndroidModel "model" should be a TestTableDelegate
+		stepDefs.thenTheTableDelegateOfTestTableDelegateAndroidModel_ShouldBeATestTableDelegate("model");
+	}
+	
 	public void testSettingTheTableDelegateAtConstruction() {
 		// Given a FakeTestTableDelegate called "delegate"
 		stepDefs.givenAFakeTestTableDelegateCalled_("delegate");

@@ -39,6 +39,11 @@ public class AndroidModelStepDefinitions {
 		globals.put(modelName, new AndroidModel<TestTableDelegate>(TestTableDelegate.class));
 	}
 	
+	public void whenICreateATestTableDelegateAndroidModelCalled_UsingAClassDelegate(
+			String modelName) {
+		globals.put(modelName, new AndroidModel<TestTableDelegate>(new ClassDelegate<TestTableDelegate>(TestTableDelegate.class)));
+	}
+	
 	public <T> void whenISetThe_OfTestTableDelegateAndroidModel_To_(Field<T> field,
 			String modelName, T value) {
 		@SuppressWarnings("unchecked")
