@@ -11,7 +11,7 @@ public class AndroidModel<T extends TableDelegate> {
 	
 	public AndroidModel(Class<T> tableDelegateClass) {
 		try {
-			tableDelegate = tableDelegateClass.newInstance();
+			setTableDelegate(tableDelegateClass.newInstance());
 		} catch (IllegalAccessException e) {
 			// The class doesn't have a public constructor. Wrap as runtime exception, hope this never happens
 			// Commented out until a feature can be written for this
