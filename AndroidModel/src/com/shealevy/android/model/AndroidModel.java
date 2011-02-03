@@ -7,43 +7,34 @@ import com.shealevy.android.model.injection.ClassDelegate;
 import android.content.ContentResolver;
 import android.database.Cursor;
 
+@SuppressWarnings("rawtypes")
 public class AndroidModel<T extends TableDelegate> {
-	private HashMap<TableDelegateField<T, ?>, Object> params = new HashMap<TableDelegateField<T, ?>, Object>();
+	private HashMap<TableDelegateField<T, ?>, Object> params;
 	private T tableDelegate;
 
 	public AndroidModel(Class<T> tableDelegateClass) {
 		this(new ClassDelegate<T>(tableDelegateClass));
 	}
 	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public AndroidModel(Class<T> tableDelegateClass, Class<? extends HashMap> hashMapClass) {
-		this(tableDelegateClass);
-		try {
-			params = hashMapClass.newInstance();
-		} catch (IllegalAccessException e) {
-			// The class doesn't have a public constructor. Wrap as runtime
-			// exception, hope this never happens
-			// Commented out until a feature can be written for this
-			// throw new RuntimeException(e);
-		} catch (InstantiationException e) {
-			// The class is abstract or an interface. Wrap as runtime exception,
-			// hope this never happens
-			// Commented out until a feature can be written for this
-			// throw new RuntimeException(e);
-		}
+	public <U extends HashMap> AndroidModel(Class<T> tableDelegateClass, Class<U> hashMapClass) {
+		this(new ClassDelegate<T>(tableDelegateClass), new ClassDelegate<U>(hashMapClass));
 	}
 
 	public AndroidModel(ClassDelegate<T> tableDelegateClass) {
-		constructTableDelegate(tableDelegateClass);
+		this(tableDelegateClass, new ClassDelegate<HashMap>(HashMap.class));
 	}
 	
-	@SuppressWarnings("rawtypes")
 	public AndroidModel(ClassDelegate<T> tableDelegateClass, ClassDelegate<? extends HashMap> hashMapClass) {
-		this(tableDelegateClass);
+		constructTableDelegate(tableDelegateClass);
 		constructParams(hashMapClass);
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public AndroidModel(T tableDelegate) {
+		setTableDelegate(tableDelegate);
+		constructParams(new ClassDelegate<HashMap>(HashMap.class));
+	}
+
+	@SuppressWarnings("unchecked")
 	private void constructParams(ClassDelegate<? extends HashMap> hashMapClass) {
 		try {
 			params = hashMapClass.newInstance();
@@ -58,10 +49,6 @@ public class AndroidModel<T extends TableDelegate> {
 			// Commented out until a feature can be written for this
 			// throw new RuntimeException(e);
 		}
-	}
-
-	public AndroidModel(T tableDelegate) {
-		setTableDelegate(tableDelegate);
 	}
 
 	private void constructTableDelegate(ClassDelegate<T> tableDelegateClass) {
