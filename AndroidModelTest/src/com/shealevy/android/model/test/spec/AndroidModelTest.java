@@ -47,6 +47,11 @@ public class AndroidModelTest extends AndroidTestCase {
 		}
 	}
 	
+	public void testItSetsTheTableDelegateWhenAHashMapClassIsProvided() {
+		AndroidModel<TestTableDelegate> model = new AndroidModel<TestTableDelegate>(TestTableDelegate.class, FakeHashMap.class);
+		assertNotNull(model.getTableDelegate());
+	}
+	
 	// Describe AndroidModel(ClassDelegate<T> tableDelegateClass)
 	public void testItSetsTheTableDelegateWithAClassDelegate() {
 		AndroidModel<TestTableDelegate> model = new AndroidModel<TestTableDelegate>(new ClassDelegate<TestTableDelegate>(TestTableDelegate.class));
