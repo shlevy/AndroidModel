@@ -166,6 +166,15 @@ public class AndroidModelTest extends AndroidTestCase {
 		model.set(TwoTableDelegate.Field.ID, 2);
 		model.load(new ContentResolverDelegate(getContext().getContentResolver()));
 		assertEquals("SecondTest", model.get(TwoTableDelegate.Field.NAME));
+		assertEquals(2, ((Integer) model.get(TwoTableDelegate.Field.ID)).intValue());
+	}
+	
+	public void testItLoadsWhenNameIsSetToThirdTest() {
+		AndroidModel<TwoTableDelegate> model = new AndroidModel<TwoTableDelegate>(TwoTableDelegate.class);
+		model.set(TwoTableDelegate.Field.NAME, "ThirdTest");
+		model.load(new ContentResolverDelegate(getContext().getContentResolver()));
+		assertEquals("ThirdTest", model.get(TwoTableDelegate.Field.NAME));
+		assertEquals(3, ((Integer) model.get(TwoTableDelegate.Field.ID)).intValue());
 	}
 	
 	public static class FakeHashMap<K, V> extends HashMap<K, V> {
@@ -206,6 +215,11 @@ public class AndroidModelTest extends AndroidTestCase {
 			if(selection.contains("_id = 2")){
 				MatrixCursor cursor = new MatrixCursor(projection);
 				cursor.addRow(new Object[] {2, "SecondTest"});
+				return cursor;
+			}
+			if(selection.contains("name = 'ThirdTest'")) {
+				MatrixCursor cursor = new MatrixCursor(projection);
+				cursor.addRow(new Object[] {3, "ThirdTest"});
 				return cursor;
 			}
 			return null;
