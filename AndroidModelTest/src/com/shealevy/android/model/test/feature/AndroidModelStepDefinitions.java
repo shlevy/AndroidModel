@@ -175,6 +175,7 @@ public class AndroidModelStepDefinitions {
 				(TestTableDelegate) globals.get(delegateName), FakeHashMap.class));
 	}
 
+	@SuppressWarnings("rawtypes")
 	public void whenICreateATestTableDelegateAndroidModelCalled_WithTestTableDelegate_AndAFakeHashMapClassClassDelegate(
 			String modelName, String delegateName) {
 		globals.put(modelName, new AndroidModel<TestTableDelegate>(

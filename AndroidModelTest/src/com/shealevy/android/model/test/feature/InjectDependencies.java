@@ -93,6 +93,21 @@ public class InjectDependencies extends AndroidTestCase {
 		stepDefs.thenTheFakeHashMapPutMethodShouldHaveBeenCalledWith_And_(TestTableDelegate.Field.ID, 2);
 	}
 	
+	public void testSettingTheTableDelegateAtConstructionAndProvidingAHashMapSubClassClassDelegate() {
+		// Given a FakeTestTableDelegate called "delegate"
+		stepDefs.givenAFakeTestTableDelegateCalled_("delegate");
+		
+		// When I create a TestTableDelegate AndroidModel called "model" with TableDelegate "delegate"
+		stepDefs.whenICreateATestTableDelegateAndroidModelCalled_WithTestTableDelegate_AndAFakeHashMapClassClassDelegate("model", "delegate");
+		// And I set the ID of TestTableDelegate AndroidModel "model" to 2
+		stepDefs.whenISetThe_OfTestTableDelegateAndroidModel_To_(TestTableDelegate.Field.ID, "model", 2);
+		
+		// Then the TableDelegate of TestTableDelegate AndroidModel "model" should equal TableDelegate "delegate"
+		stepDefs.thenTheTableDelegateOfTestTableDelegateAndroidModel_ShouldEqualTableDelegate_("model", "delegate");
+		// And the FakeHashMap put method should have been called with TestTableDelegate.Field.ID and 2
+		stepDefs.thenTheFakeHashMapPutMethodShouldHaveBeenCalledWith_And_(TestTableDelegate.Field.ID, 2);
+	}
+	
 	public void testSettingTheTableDelegateAfterConstruction() {
 		// Given a TestTableDelegate AndroidModel called "model"
 		stepDefs.givenATestTableDelegateAndroidModelCalled_("model");

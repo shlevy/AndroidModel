@@ -2,10 +2,10 @@ package com.shealevy.android.model;
 
 import java.util.HashMap;
 
-import com.shealevy.android.model.injection.ClassDelegate;
-
 import android.content.ContentResolver;
 import android.database.Cursor;
+
+import com.shealevy.android.model.injection.ClassDelegate;
 
 @SuppressWarnings("rawtypes")
 public class AndroidModel<T extends TableDelegate> {
@@ -15,16 +15,19 @@ public class AndroidModel<T extends TableDelegate> {
 	public AndroidModel(Class<T> tableDelegateClass) {
 		this(new ClassDelegate<T>(tableDelegateClass));
 	}
-	
-	public <U extends HashMap> AndroidModel(Class<T> tableDelegateClass, Class<U> hashMapClass) {
-		this(new ClassDelegate<T>(tableDelegateClass), new ClassDelegate<U>(hashMapClass));
+
+	public <U extends HashMap> AndroidModel(Class<T> tableDelegateClass,
+			Class<U> hashMapClass) {
+		this(new ClassDelegate<T>(tableDelegateClass), new ClassDelegate<U>(
+				hashMapClass));
 	}
 
 	public AndroidModel(ClassDelegate<T> tableDelegateClass) {
 		this(tableDelegateClass, new ClassDelegate<HashMap>(HashMap.class));
 	}
-	
-	public AndroidModel(ClassDelegate<T> tableDelegateClass, ClassDelegate<? extends HashMap> hashMapClass) {
+
+	public AndroidModel(ClassDelegate<T> tableDelegateClass,
+			ClassDelegate<? extends HashMap> hashMapClass) {
 		constructTableDelegate(tableDelegateClass);
 		constructParams(hashMapClass);
 	}
@@ -32,10 +35,15 @@ public class AndroidModel<T extends TableDelegate> {
 	public AndroidModel(T tableDelegate) {
 		this(tableDelegate, HashMap.class);
 	}
-	
-	public <U extends HashMap> AndroidModel(T tableDelegate, Class<U> hashMapClass){
+
+	public <U extends HashMap> AndroidModel(T tableDelegate,
+			Class<U> hashMapClass) {
 		setTableDelegate(tableDelegate);
 		constructParams(new ClassDelegate<U>(hashMapClass));
+	}
+
+	public AndroidModel(T testTableDelegate,
+			ClassDelegate<? extends HashMap> classDelegate) {
 	}
 
 	@SuppressWarnings("unchecked")
