@@ -36,7 +36,7 @@ public class AccessData extends AndroidTestCase {
 		// And I load TestTableDelegate AndroidModel "model1" with a fake ContentResolver
 		stepDefs.whenILoadTestTableDelegateAndroidModel_WithAFakeContentResolver("model1");
 		// And I set the NAME of TestTableDelegate AndroidModel "model2" to "ThirdTest"
-		stepDefs.whenISetThe_OfTestTableDelegateAndroidModel_To_(TestTableDelegate.Field.NAME, "model1", "ThirdTest");
+		stepDefs.whenISetThe_OfTestTableDelegateAndroidModel_To_(TestTableDelegate.Field.NAME, "model2", "ThirdTest");
 		// And I load TestTableDelegate AndroidModel "model2" with a fake ContentResolver
 		stepDefs.whenILoadTestTableDelegateAndroidModel_WithAFakeContentResolver("model2");
 		
