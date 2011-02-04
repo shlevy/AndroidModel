@@ -25,7 +25,7 @@ public class AccessData extends AndroidTestCase {
 		super.tearDown();
 	}
 	
-	public void testLoadingData() {
+	public void testLoadingDataByOneParameter() {
 		// Given a TestTableDelegate AndroidModel called "model1"
 		stepDefs.givenATestTableDelegateAndroidModelCalled_("model1");
 		// And a TestTableDelegate AndroidModel called "model2"
