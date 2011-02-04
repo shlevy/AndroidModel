@@ -42,8 +42,8 @@ public class AndroidModel<T extends TableDelegate> {
 		constructParams(new ClassDelegate<U>(hashMapClass));
 	}
 
-	public AndroidModel(T testTableDelegate,
-			ClassDelegate<? extends HashMap> classDelegate) {
+	public AndroidModel(T tableDelegate,
+			ClassDelegate<? extends HashMap> hashMapClass) {
 	}
 
 	@SuppressWarnings("unchecked")
