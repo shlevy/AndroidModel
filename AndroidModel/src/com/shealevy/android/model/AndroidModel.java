@@ -94,13 +94,20 @@ public class AndroidModel<T extends TableDelegate> {
 
 	@SuppressWarnings("unchecked")
 	public void load(ContentResolverDelegate cr) {
-		String where = "_id = 2";
+		String where = null;
 		TableDelegateField<T, ?>[] fields = params.keySet().iterator().next()
 				.getFields();
 		String[] projection = new String[fields.length];
 		int index = 0;
 		for (TableDelegateField<T, ?> field : fields) {
 			projection[index] = field.name();
+			if(params.containsKey(field)) {
+				if(field.type() == String.class) {
+					where = field.name()+" = '"+(String) params.get(field)+"'";
+				} else if(field.type() == int.class) {
+					where = field.name()+" = "+((Integer)params.get(field)).intValue();
+				}
+			}
 			index++;
 		}
 		Cursor cursor = tableDelegate.query(cr, projection, where, null, null);
@@ -108,9 +115,12 @@ public class AndroidModel<T extends TableDelegate> {
 
 		index = 0;
 		for (TableDelegateField<T, ?> field : fields) {
-			if (field.type().getName().equals("java.lang.String")) {
-				set((TableDelegateField<T, String>) field, "SecondTest");
+			if (field.type() == String.class) {
+				set((TableDelegateField<T, String>) field, cursor.getString(index));
+			} else if (field.type() == int.class) {
+				set((TableDelegateField<T, Integer>) field, cursor.getInt(index));
 			}
+			index++;
 		}
 	}
 

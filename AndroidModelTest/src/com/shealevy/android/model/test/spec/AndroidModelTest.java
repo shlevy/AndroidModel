@@ -160,7 +160,7 @@ public class AndroidModelTest extends AndroidTestCase {
 		assertEquals(2, model.get(i).intValue());
 	}
 	
-	// Describe load(ContentResolver cr)
+	// Describe load(ContentResolverDelegate cr)
 	public void testItLoadsWhenIdIsSetToTwo() {
 		AndroidModel<TwoTableDelegate> model = new AndroidModel<TwoTableDelegate>(TwoTableDelegate.class);
 		model.set(TwoTableDelegate.Field.ID, 2);

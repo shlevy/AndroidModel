@@ -28,7 +28,7 @@ public class AndroidModelStepDefinitions {
 				Object[] columnValues = null;
 				if (selection.contains("_id = 2"))
 					columnValues = new Object[] { 2, "SecondTest" };
-				else if (selection.contains("name = ThirdTest"))
+				else if (selection.contains("name = 'ThirdTest'"))
 					columnValues = new Object[] { 3, "ThirdTest" };
 				cursor.addRow(columnValues);
 				return cursor;
