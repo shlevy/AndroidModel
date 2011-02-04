@@ -18,6 +18,6 @@ public abstract class TableDelegateField<T, U> {
 	}
 
 	public Class<U> type() {
-		return null;
+		return (Class<U>) int.class;
 	}
 }
