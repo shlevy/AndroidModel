@@ -175,6 +175,12 @@ public class AndroidModelStepDefinitions {
 				(TestTableDelegate) globals.get(delegateName), FakeHashMap.class));
 	}
 
+	public void whenICreateATestTableDelegateAndroidModelCalled_WithTestTableDelegate_AndAFakeHashMapClassClassDelegate(
+			String modelName, String delegateName) {
+		globals.put(modelName, new AndroidModel<TestTableDelegate>(
+				(TestTableDelegate) globals.get(delegateName), new ClassDelegate<FakeHashMap>(FakeHashMap.class)));
+	}
+
 	public void thenAllTestTableDelegateFieldsOfTestTableDelegateAndroidModel_ShouldBeSetToDefaults(
 			String modelName) {
 		@SuppressWarnings("unchecked")
