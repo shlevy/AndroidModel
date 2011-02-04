@@ -44,6 +44,7 @@ public class AndroidModel<T extends TableDelegate> {
 
 	public AndroidModel(T tableDelegate,
 			ClassDelegate<? extends HashMap> hashMapClass) {
+		setTableDelegate(tableDelegate);
 		constructParams(hashMapClass);
 	}
 
