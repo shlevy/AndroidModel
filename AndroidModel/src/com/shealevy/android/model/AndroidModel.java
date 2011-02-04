@@ -30,8 +30,7 @@ public class AndroidModel<T extends TableDelegate> {
 	}
 
 	public AndroidModel(T tableDelegate) {
-		setTableDelegate(tableDelegate);
-		constructParams(new ClassDelegate<HashMap>(HashMap.class));
+		this(tableDelegate, HashMap.class);
 	}
 	
 	public <U extends HashMap> AndroidModel(T tableDelegate, Class<U> hashMapClass){
