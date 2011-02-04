@@ -2,10 +2,10 @@ package com.shealevy.android.model;
 
 import java.util.HashMap;
 
-import android.content.ContentResolver;
 import android.database.Cursor;
 
 import com.shealevy.android.model.injection.ClassDelegate;
+import com.shealevy.android.model.injection.ContentResolverDelegate;
 
 @SuppressWarnings("rawtypes")
 public class AndroidModel<T extends TableDelegate> {
@@ -93,7 +93,7 @@ public class AndroidModel<T extends TableDelegate> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void load(ContentResolver cr) {
+	public void load(ContentResolverDelegate cr) {
 		String where = "_id = 2";
 		TableDelegateField<T, ?>[] fields = params.keySet().iterator().next()
 				.getFields();

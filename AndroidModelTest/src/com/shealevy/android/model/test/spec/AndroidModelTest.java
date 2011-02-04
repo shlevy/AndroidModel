@@ -7,9 +7,9 @@ import com.shealevy.android.model.AndroidModel;
 import com.shealevy.android.model.TableDelegate;
 import com.shealevy.android.model.TableDelegateField;
 import com.shealevy.android.model.injection.ClassDelegate;
+import com.shealevy.android.model.injection.ContentResolverDelegate;
 import com.shealevy.android.model.test.TestTableDelegate;
 
-import android.content.ContentResolver;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.net.Uri;
@@ -164,7 +164,7 @@ public class AndroidModelTest extends AndroidTestCase {
 	public void testItLoadsWhenIdIsSetToTwo() {
 		AndroidModel<TwoTableDelegate> model = new AndroidModel<TwoTableDelegate>(TwoTableDelegate.class);
 		model.set(TwoTableDelegate.Field.ID, 2);
-		model.load(getContext().getContentResolver());
+		model.load(new ContentResolverDelegate(getContext().getContentResolver()));
 		assertEquals("SecondTest", model.get(TwoTableDelegate.Field.NAME));
 	}
 	
@@ -202,7 +202,7 @@ public class AndroidModelTest extends AndroidTestCase {
 			}
 		}
 		
-		public Cursor query(ContentResolver cr, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+		public Cursor query(ContentResolverDelegate cr, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
 			if(selection.contains("_id = 2")){
 				MatrixCursor cursor = new MatrixCursor(projection);
 				cursor.addRow(new Object[] {2, "SecondTest"});

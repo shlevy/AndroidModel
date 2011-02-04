@@ -7,12 +7,10 @@ import junit.framework.Assert;
 import com.shealevy.android.model.AndroidModel;
 import com.shealevy.android.model.TableDelegate;
 import com.shealevy.android.model.injection.ClassDelegate;
+import com.shealevy.android.model.injection.ContentResolverDelegate;
 import com.shealevy.android.model.test.TestTableDelegate;
 import com.shealevy.android.model.test.TestTableDelegate.Field;
 
-import android.content.ContentProvider;
-import android.content.ContentResolver;
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.MatrixCursor;
@@ -20,57 +18,26 @@ import android.net.Uri;
 import android.test.mock.MockContentResolver;
 
 public class AndroidModelStepDefinitions {
-	private class AndroidModelContentResolver extends MockContentResolver {
-		private class MockContentProvider extends ContentProvider {
-
-			@Override
-			public int delete(Uri uri, String selection, String[] selectionArgs) {
-				return 0;
+	private class AndroidModelContentResolver extends ContentResolverDelegate {
+		@Override
+		public Cursor query(Uri uri, String[] projection, String selection,
+				String[] selectionArgs, String sortOrder) {
+			if (uri.equals(Uri.parse("content://test/table"))) {
+				MatrixCursor cursor;
+				cursor = new MatrixCursor(projection);
+				Object[] columnValues = null;
+				if (selection.contains("_id = 2"))
+					columnValues = new Object[] { 2, "SecondTest" };
+				else if (selection.contains("name = ThirdTest"))
+					columnValues = new Object[] { 3, "ThirdTest" };
+				cursor.addRow(columnValues);
+				return cursor;
 			}
-
-			@Override
-			public String getType(Uri uri) {
-				return null;
-			}
-
-			@Override
-			public Uri insert(Uri uri, ContentValues values) {
-				return null;
-			}
-
-			@Override
-			public boolean onCreate() {
-				return false;
-			}
-
-			@Override
-			public Cursor query(Uri uri, String[] projection, String selection,
-					String[] selectionArgs, String sortOrder) {
-				if (uri.equals(Uri.parse("content://test/table"))) {
-					MatrixCursor cursor;
-					cursor = new MatrixCursor(projection);
-					Object[] columnValues = null;
-					if (selection.contains("_id = 2"))
-						columnValues = new Object[] { 2, "SecondTest" };
-					else if (selection.contains("name = ThirdTest"))
-						columnValues = new Object[] { 3, "ThirdTest" };
-					cursor.addRow(columnValues);
-					return cursor;
-				}
-				return null;
-			}
-
-			@Override
-			public int update(Uri uri, ContentValues values, String selection,
-					String[] selectionArgs) {
-				return 0;
-			}
-
+			return null;
 		}
-
+		
 		public AndroidModelContentResolver() {
-			super();
-			this.addProvider("test", new MockContentProvider());
+			super(new MockContentResolver());
 		}
 	}
 
@@ -148,7 +115,7 @@ public class AndroidModelStepDefinitions {
 		@SuppressWarnings("unchecked")
 		AndroidModel<TestTableDelegate> model = (AndroidModel<TestTableDelegate>) globals
 				.get(modelName);
-		ContentResolver cr = new AndroidModelContentResolver();
+		ContentResolverDelegate cr = new AndroidModelContentResolver();
 		model.load(cr);
 	}
 
