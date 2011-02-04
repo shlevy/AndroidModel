@@ -33,13 +33,12 @@ public class AndroidModel<T extends TableDelegate> {
 	}
 
 	public AndroidModel(T tableDelegate) {
-		this(tableDelegate, HashMap.class);
+		this(tableDelegate, new ClassDelegate<HashMap>(HashMap.class));
 	}
 
 	public <U extends HashMap> AndroidModel(T tableDelegate,
 			Class<U> hashMapClass) {
-		setTableDelegate(tableDelegate);
-		constructParams(new ClassDelegate<U>(hashMapClass));
+		this(tableDelegate, new ClassDelegate<U>(hashMapClass));
 	}
 
 	public AndroidModel(T tableDelegate,
