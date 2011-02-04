@@ -46,6 +46,11 @@ public class TableDelegateFieldTest extends AndroidTestCase {
 		assertEquals("_id", i.name());
 	}
 	
+	public void testItReturnsTheNameWhenTheFieldIsAString() {
+		StringField s = new StringField();
+		assertEquals("name", s.name());
+	}
+	
 	private class StringField extends TableDelegateField<TestTableDelegate, String> {
 		public StringField() {
 			super("name", String.class, "Test");
