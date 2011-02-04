@@ -40,6 +40,12 @@ public class TableDelegateFieldTest extends AndroidTestCase {
 		assertEquals(String.class, s.type());
 	}
 	
+	// Describe name()
+	public void testItReturnsTheNameWhenTheFieldIsAnInt() {
+		IntField i = new IntField();
+		assertEquals("int", i.name());
+	}
+	
 	private class StringField extends TableDelegateField<TestTableDelegate, String> {
 		public StringField() {
 			super("string", String.class, "Test");
