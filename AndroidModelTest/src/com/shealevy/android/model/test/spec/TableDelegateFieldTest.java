@@ -43,12 +43,12 @@ public class TableDelegateFieldTest extends AndroidTestCase {
 	// Describe name()
 	public void testItReturnsTheNameWhenTheFieldIsAnInt() {
 		IntField i = new IntField();
-		assertEquals("int", i.name());
+		assertEquals("_id", i.name());
 	}
 	
 	private class StringField extends TableDelegateField<TestTableDelegate, String> {
 		public StringField() {
-			super("string", String.class, "Test");
+			super("name", String.class, "Test");
 		}
 
 		@Override
@@ -59,7 +59,7 @@ public class TableDelegateFieldTest extends AndroidTestCase {
 	
 	private class IntField extends TableDelegateField<TestTableDelegate, Integer> {
 		public IntField() {
-			super("int", int.class, 1);
+			super("_id", int.class, 1);
 		}
 
 		@Override

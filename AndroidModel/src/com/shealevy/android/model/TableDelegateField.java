@@ -16,7 +16,7 @@ public abstract class TableDelegateField<T, U> {
 	public abstract TableDelegateField<T, ?>[] getFields();
 
 	public String name() {
-		return null;
+		return "_id";
 	}
 
 	public Class<U> type() {
